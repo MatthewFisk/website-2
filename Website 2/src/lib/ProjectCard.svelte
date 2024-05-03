@@ -5,12 +5,28 @@
 -->
 
 <script>
+    import Button from "./Button.svelte";
+
     export let project_name = "default";
     export let src = "./src/assets/placeholder.jpg";
     export let tech_stack = ["java", "python"];
     export let scope = 1;
     export let team_size = 1;
+    export let date = "Fall 1900 - Summer 2073"
     export let description = "This project was fun!";
+
+    function getScope() {
+        switch(scope) {
+            case 1:
+                return 'Small';
+            case 2:
+                return 'Medium';
+            case 3:
+                return 'Large';
+            case 4:
+                return 'Huge';
+        }
+    }
 </script>
 
 <div class="card_positioner">
@@ -30,13 +46,17 @@
 
             <!-- Right Expansion -->
             <div class='card_expand_right'>
+                <p><b>{date}</b></p>
                 <p>{description}</p>
             </div>
         </div>
 
         <div class="card_expand_bottom">
-            <h3>Scope: {scope}</h3>
+            <h3>Scope: {getScope()}</h3>
+            <br>
+            <!--<img src="./src/assets/Team Size {team_size}.png"/>-->
             <h3>Team Size: {team_size}</h3>
+            <Button />
         </div>
     </div>
 </div>
@@ -159,7 +179,10 @@
     .card_expand_right {
         height: 0px;
 
+        margin-left: -120px;
         padding: 10px;
+
+        pointer-events: none;
 
         justify-content: center;
     }
@@ -173,6 +196,8 @@
 
         height: 0px;
 
+        margin-top: -57px;
+
         border-radius: 15px;
 
         transition: height 0.15s ease-in-out;
@@ -180,9 +205,19 @@
     .card_expand_bottom h3 {
         margin: 0px;
 
+        position: relative;
+        left: 0px;
+
+        display: inline-flex;
+
         opacity: 0;
 
         transition: opacity 0.1s ease-out;
+    }
+    .card_expand_bottom img {
+        height: 40px;
+
+        display: inline-flex;
     }
 
     /* Card Transitions on Hover */
@@ -201,7 +236,8 @@
         transition-delay: 0.3s;
     }
     .card_expand:hover .card_expand_upper .card_expand_right {
-        width: 225px;
+        width: 270px;
+        margin-left: -45px;
     }
     .card_expand:hover .card_expand_upper .card_expand_right p {
         opacity: 1;
@@ -222,9 +258,11 @@
         transition-delay: 0.3s;
     }
     .card_expand:hover .card {
-        /*transform: scale(0.7);*/
+        transform: scale(0.8) translateX(-12%) translateY(-12%);
         animation: lighten 0.35s 1;
         animation-timing-function: steps(1, end);
+        transition: transform 0.15s ease-in;
+        transition-delay: 0.3s;
     }
     @keyframes lighten {
         0% {
