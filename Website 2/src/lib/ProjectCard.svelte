@@ -14,6 +14,8 @@
     export let team_size = 1;
     export let date = "Fall 1900 - Summer 2073"
     export let description = "This project was fun!";
+    export let learn_more = "https://www.google.com";
+    export let source_code = "https://www.google.com";
 
     function getScope() {
         switch(scope) {
@@ -52,11 +54,15 @@
         </div>
 
         <div class="card_expand_bottom">
-            <h3>Scope: {getScope()}</h3>
-            <br>
-            <!--<img src="./src/assets/Team Size {team_size}.png"/>-->
-            <h3>Team Size: {team_size}</h3>
-            <Button />
+            <div class="scope_and_size">
+                <h3>Scope: {getScope()}</h3>
+                <br>
+                <h3>Team Size: {team_size}</h3>
+                <div class="buttons">
+                    <Button words="Learn More" href={learn_more}/>
+                    <Button words="Source Code" href={source_code}/>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -204,11 +210,13 @@
     }
     .card_expand_bottom h3 {
         margin: 0px;
+        margin-top: 10px;
 
-        position: relative;
-        left: 0px;
+        position: absolute;
 
-        display: inline-flex;
+        left: 15px;
+
+        display: inline-block;
 
         opacity: 0;
 
@@ -218,6 +226,15 @@
         height: 40px;
 
         display: inline-flex;
+    }
+    .buttons {
+        position: absolute;
+
+        right: 15px;
+
+        opacity: 0;
+
+        margin-top: -7px;
     }
 
     /* Card Transitions on Hover */
@@ -249,6 +266,11 @@
         transition-delay: 0.3s;
     }
     .card_expand:hover .card_expand_bottom h3 {
+        opacity: 1;
+        transition: opacity 0.45s ease-in;
+        transition-delay: 0.3s;
+    }
+    .card_expand:hover .card_expand_bottom .buttons {
         opacity: 1;
         transition: opacity 0.45s ease-in;
         transition-delay: 0.3s;
